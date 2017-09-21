@@ -6,8 +6,6 @@ import java.util.Map;
 import org.unidal.lookup.annotation.Named;
 import org.unidal.net.Networks;
 
-import com.dianping.cat.Cat;
-
 @Named
 public class CatBizLogger implements BizLogger {
 
@@ -19,7 +17,7 @@ public class CatBizLogger implements BizLogger {
 
 	@Override
 	public void log(BizEvent event) {
-		Map<String, String> indexedTags = new HashMap<String, String>();
+		Map<String, String> indexedTags = new HashMap<>();
 		indexedTags.put("type", type);
 		indexedTags.put("host", m_localhost);
 		indexedTags.put("eventType", event.getEventType());
@@ -27,8 +25,8 @@ public class CatBizLogger implements BizLogger {
 		for (Map.Entry<String, Object> entry : event.getDatas().entrySet()) {
 			indexedTags.put(entry.getKey(), String.valueOf(entry.getValue()));
 		}
-		Map<String, String> storedTags = new HashMap<String, String>();
-		Cat.logTags(scenario, indexedTags, storedTags);
+		Map<String, String> storedTags = new HashMap<>();
+	//	Cat.logTags(scenario, indexedTags, storedTags); //TODO
 	}
 
 }

@@ -19,9 +19,9 @@
 			<groupId>com.ctrip.hermes</groupId>
 			<artifactId>hermes-env</artifactId>
 		</dependency>
-		<dependency>
+ 		<dependency>
 			<groupId>com.ctrip.framework</groupId>
-			<artifactId>vi</artifactId>
+			<artifactId>cornerstone</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.dianping.cat</groupId>
@@ -75,13 +75,22 @@
 			<artifactId>test-framework</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.codehaus.plexus</groupId>
+		    <artifactId>plexus-container-default</artifactId>
+		</dependency>		
+		<dependency>
+		    <groupId>org.apache.avro</groupId>
+		    <artifactId>avro</artifactId>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.unidal.maven.plugins</groupId>
 				<artifactId>plexus-maven-plugin</artifactId>
-				<version>2.2.0</version>
+				<version>2.5.8</version>
 				<executions>
 					<execution>
 						<id>generate plexus component descriptor</id>
@@ -98,7 +107,7 @@
 			<plugin>
 				<groupId>org.unidal.maven.plugins</groupId>
 				<artifactId>codegen-maven-plugin</artifactId>
-				<version>2.2.2</version>
+				<version>2.5.8</version>
 				<executions>
 					<execution>
 						<id>generate dal model files</id>

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -119,7 +119,8 @@ public class DefaultPullConsumerHolderTest {
 		final CountDownLatch latch2 = new CountDownLatch(1);
 		final AtomicReference<List<ConsumerMessage<String>>> msgs = new AtomicReference<>();
 		new Thread() {
-			public void run() {
+			@Override
+            public void run() {
 				latch1.countDown();
 				msgs.set(holder.collect(2, Integer.MAX_VALUE).getMessages());
 				latch2.countDown();
@@ -235,7 +236,7 @@ public class DefaultPullConsumerHolderTest {
 
 			@Override
 			public Boolean answer(InvocationOnMock invocation) throws Throwable {
-				cmds.add(invocation.getArgumentAt(0, AckMessageCommandV5.class));
+				cmds.add(invocation.getArgument(0));
 				latch2.countDown();
 				return true;
 			}
@@ -382,7 +383,7 @@ public class DefaultPullConsumerHolderTest {
 		when(ackManager.writeAckToBroker(any(AckMessageCommandV5.class))).thenAnswer(new Answer<Boolean>() {
 			@Override
 			public Boolean answer(InvocationOnMock invocation) throws Throwable {
-				cmd.set(invocation.getArgumentAt(0, AckMessageCommandV5.class));
+				cmd.set(invocation.getArgument(0));
 				latch.countDown();
 				return true;
 			}
@@ -455,7 +456,7 @@ public class DefaultPullConsumerHolderTest {
 
 			@Override
 			public Boolean answer(InvocationOnMock invocation) throws Throwable {
-				cmds.add(invocation.getArgumentAt(0, AckMessageCommandV5.class));
+				cmds.add(invocation.getArgument(0));
 				latch.countDown();
 				return true;
 			}
@@ -547,7 +548,7 @@ public class DefaultPullConsumerHolderTest {
 
 			@Override
 			public Boolean answer(InvocationOnMock invocation) throws Throwable {
-				cmds.add(invocation.getArgumentAt(0, AckMessageCommandV5.class));
+				cmds.add(invocation.getArgument(0));
 				latch.countDown();
 				return true;
 			}
@@ -613,7 +614,7 @@ public class DefaultPullConsumerHolderTest {
 		brokerMsg.setMsgSeq(offset);
 		brokerMsg.setResend(resend);
 
-		return new PullBrokerConsumerMessage<String>(brokerMsg);
+		return new PullBrokerConsumerMessage<>(brokerMsg);
 	}
 
 }

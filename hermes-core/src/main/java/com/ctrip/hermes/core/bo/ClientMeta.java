@@ -151,7 +151,8 @@ public class ClientMeta {
 			for (Entry<Long, List<Integer>> tp : endpointMapping.getValue().entrySet()) {
 				Topic topic = m_topics.get(tp.getKey());
 				for (Integer p : tp.getValue()) {
-					Partition partition = new Partition(p).setEndpoint(endpoint);
+					Partition partition = new Partition(p);
+					partition.setEndpoint(endpoint);
 					if (Storage.KAFKA.equals(topic.getStorageType())) {
 						partition.setReadDatasource("kafka-consumer");
 						partition.setWriteDatasource("kafka-producer");
@@ -194,15 +195,15 @@ public class ClientMeta {
 
 	private Long m_id;
 
-	private Map<String, Idc> m_idcs = new LinkedHashMap<String, Idc>();// kafka topic cares primary idc;
+	private Map<String, Idc> m_idcs = new LinkedHashMap<>();// kafka topic cares primary idc;
 
-	private Map<String, Endpoint> m_endpoints = new LinkedHashMap<String, Endpoint>();
+	private Map<String, Endpoint> m_endpoints = new LinkedHashMap<>();
 
-	private Map<String, Map<Long, List<Integer>>> m_endpointMapping = new LinkedHashMap<String, Map<Long, List<Integer>>>();
+	private Map<String, Map<Long, List<Integer>>> m_endpointMapping = new LinkedHashMap<>();
 
 	private Map<Long, Topic> m_topics = new LinkedHashMap<>();// remove partitions attribute, use partition count
 
-	private Map<String, Storage> m_storages = new LinkedHashMap<String, Storage>();// all storage needed, remove mysql datasources,
+	private Map<String, Storage> m_storages = new LinkedHashMap<>();// all storage needed, remove mysql datasources,
 	                                                                               // broker use mysql storage
 
 	public Long getVersion() {
@@ -296,9 +297,9 @@ public class ClientMeta {
 		private String storageType;
 
 		@JSONField(name = "c")
-		private List<ConsumerGroup> consumerGroups = new ArrayList<ConsumerGroup>();
+		private List<ConsumerGroup> consumerGroups = new ArrayList<>();
 
-		private transient List<Partition> partitions = new ArrayList<Partition>();
+		private transient List<Partition> partitions = new ArrayList<>();
 
 		public Topic addConsumerGroup(ConsumerGroup consumerGroup) {
 			consumerGroups.add(consumerGroup);

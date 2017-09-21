@@ -58,7 +58,7 @@ public class DefaultMetaService implements MetaService, Initializable {
 	@Inject
 	private ManualConfigService m_manualConfigService;
 
-	private AtomicReference<Meta> m_metaCache = new AtomicReference<Meta>();
+	private AtomicReference<Meta> m_metaCache = new AtomicReference<>();
 
 	private long m_lastLoadedTime = 0;
 
@@ -115,7 +115,7 @@ public class DefaultMetaService implements MetaService, Initializable {
 		topicPattern = StringUtils.trim(topicPattern);
 
 		Meta meta = getMeta();
-		List<Topic> matchedTopics = new ArrayList<Topic>();
+		List<Topic> matchedTopics = new ArrayList<>();
 
 		Collection<Topic> topics = meta.getTopics().values();
 
@@ -191,7 +191,7 @@ public class DefaultMetaService implements MetaService, Initializable {
 	@Override
 	public List<Datasource> listAllMysqlDataSources() {
 		Meta meta = getMeta();
-		final List<Datasource> dataSources = new ArrayList<Datasource>();
+		final List<Datasource> dataSources = new ArrayList<>();
 
 		meta.accept(new BaseVisitor2() {
 
@@ -205,6 +205,11 @@ public class DefaultMetaService implements MetaService, Initializable {
 
 				super.visitDatasourceChildren(ds);
 			}
+
+            private Storage getAncestor(int i) {
+                // TODO Auto-generated method stub
+                return null;
+            }
 
 		});
 

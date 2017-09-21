@@ -9,7 +9,7 @@ import org.unidal.lookup.configuration.Component;
 final class HermesDatabaseConfigurator extends AbstractJdbcResourceConfigurator {
    @Override
    public List<Component> defineComponents() {
-      List<Component> all = new ArrayList<Component>();
+      List<Component> all = new ArrayList<>();
 
 
 //      defineSimpleTableProviderComponents(all, "hermes", com.ctrip.hermes.broker.dal.hermes._INDEX.getEntityClasses());
